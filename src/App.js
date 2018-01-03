@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css'
+import Format from './components/Format';
 
 
 class App extends Component {
@@ -35,6 +36,9 @@ class App extends Component {
           <br />
           <p> Koi hai </p>
         </SlidingPane>
+        <MuiThemeProvider>
+          <Format />
+        </MuiThemeProvider>
         <p className="App-intro">
           Important components incoming
         </p>
