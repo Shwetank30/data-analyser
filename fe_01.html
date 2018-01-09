@@ -45,20 +45,21 @@
     var App = function(){
         var url = 'api';
 
-        function view(event) {
-            console.log($());
-            var id = '??'; //please determine the id
+        function view(event,person_id) {
+            console.log()
+            var id = person_id; //please determine the id
             $.ajax({
                 url: url + '/view/' +id,
                 data: data
             }).done( function (data){
-
+            $("response-message").toggleClass(".success").show().delay(5000).fadeOut();
             });
+            console.log('Running here');
+            $("#response-message").show();
         }
 
-        function remove(event) {
-            console.log("remove called successfully");
-            var id = '??'; //please determine the id
+        function remove(event, person_id) {
+            var id = person_id; //please determine the id
             $.ajax({
                 url: url + '/remove/' + id ,
                 data: data
@@ -68,22 +69,32 @@
         }
 
         function initialize() {
-            //
+            // add document. ready & then response message hide here
         }
 
         return {
-            view: view,
-            remove: remove,
+          view: view,
+          remove: remove,
+            //
         }
 
     }();
 
-    $(".view").click(function() { App.view(); return false; });
-    $(".remove").click(function() { App.remove(); return false; });
-
-    $(function () {
-
+    $(".view").click(function () {
+      // have to use a more general approach
+      App.view(this.dataset.id);
+      return false;
     });
+    $(".remove").click(function () {
+      //same here
+      App.remove(this.dataset.id);
+      return false;
+    });
+    // $(document).ready(function () {
+    //     $('#response-message').fadeIn('slow', function () {
+    //       $('#response-message').delay(5000).fadeOut();
+    //     });
+    // });
 </script>
 </body>
 </html>
