@@ -45,20 +45,38 @@
     var App = function(){
         var url = 'api';
 
+        // function ajax_response(response, success) {
+        //   return function (params) {
+        //     if(success) {
+        //       params.success(response);
+        //     } else {
+        //       params.error(response);
+        //     }
+        //   };
+        // }
+        //
+        // $.ajax = ajax_response('{ "title": "Dummy test" }', true);
+        // view();
+        // $.ajax = ajax.response(' { "error": "Error code" }',false);
+        // view();
+
         function view(event,person_id) {
-            console.log()
+            console.log('view running')
             var id = person_id; //please determine the id
+          $("#response-message").addClass("success").text("Request has been done").css("visibility","visible").delay(5000).fadeOut();
+            console.log("yeha par hu");
             $.ajax({
                 url: url + '/view/' +id,
                 data: data
             }).done( function (data){
-            $("response-message").toggleClass(".success").show().delay(5000).fadeOut();
+            // $("response-message").toggleClass(".success").show().delay(5000).fadeOut();
             });
-            console.log('Running here');
-            $("#response-message").show();
+            // console.log('Running here');
+            // $("#response-message").show();
         }
 
         function remove(event, person_id) {
+            console.log('remove me hai');
             var id = person_id; //please determine the id
             $.ajax({
                 url: url + '/remove/' + id ,
@@ -69,6 +87,7 @@
         }
 
         function initialize() {
+            console.log('initla');
             // add document. ready & then response message hide here
         }
 
@@ -82,19 +101,25 @@
 
     $(".view").click(function () {
       // have to use a more general approach
+
+      console.log('calling view');
       App.view(this.dataset.id);
+
+
       return false;
     });
     $(".remove").click(function () {
       //same here
+      console.log('calling remove');
       App.remove(this.dataset.id);
       return false;
     });
-    // $(document).ready(function () {
-    //     $('#response-message').fadeIn('slow', function () {
-    //       $('#response-message').delay(5000).fadeOut();
-    //     });
-    // });
+    $(document).ready(function () {
+        console.log('kuch ho raha');
+        $("#response-message").css("visibility","hidden"); // simple approach
+        // cleaner & faster approach is by using plain js but the same problem will exist for non-js users( script disabled)
+        //
+    });
 </script>
 </body>
 </html>
